@@ -1,5 +1,4 @@
-# React Webpack Starter
-> This is a boilerplate for React 16 & Webpack 4. It includes webpack-dev-server and a build script
+# RecipeBox
 
 ## Quick Start
 
@@ -18,13 +17,9 @@ npm run build
 
 ### Author
 
-Brad Traversy
-[Traversy Media](http://www.traversymedia.com)
+Manny Munoz
 
 ### Version
 
 1.0.0
 
-### License
-
-This project is licensed under the MIT License
