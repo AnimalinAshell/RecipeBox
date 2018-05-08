@@ -8,6 +8,7 @@ export default class Recipes extends Component {
         this.state = { recipes: [], modalToggle: false };
 
         this.handleToggleModal = this.handleToggleModal.bind(this);
+        this.handleAddRecipe = this.handleAddRecipe.bind(this);        
     }
 
     componentWillMount() {
@@ -33,7 +34,12 @@ export default class Recipes extends Component {
     }
 
     handleAddRecipe() {
-
+        // return this.setState(prevState => ({recipes: prevState.recipes.push({
+        //     name: recipeName,
+        //     Ingredient: recipeIngredient,
+        //     notes: recipeNote
+        // })}))
+            
     }
 
     handleToggleModal(){
@@ -59,11 +65,11 @@ export default class Recipes extends Component {
             </ul>
 
             <ReactModal isOpen={this.state.modalToggle} ariaHideApp={false}>
-              <form>
-                <input type="text" placeholder="Recipe Name.." />
-                <input type="text" placeholder="Ingredient.." />
-                <input type="text" placeholder="Notes.." />
-                <button>Add recipe</button>
+              <form onSubmit={this.handleAddRecipe}>
+                <input type="text" name="recipeName" placeholder="Recipe Name.." />
+                <input type="text" name="recipeIngredient" placeholder="Ingredient.." />
+                <input type="text" name="recipeNote" placeholder="Notes.." />
+                <button type="submit">Add recipe</button>
               </form>
               <button onClick={this.handleToggleModal}>X</button>
             </ReactModal>
