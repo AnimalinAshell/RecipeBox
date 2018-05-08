@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import ReactModal from 'react-modal';
 import './Recipes.css';
 
-export default class componentName extends Component {
+export default class Recipes extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -30,24 +31,36 @@ export default class componentName extends Component {
             ]
         })
     }
-    
-    // recipesList() {
-    //     return this.state.recipes.map(recipes => {
-    //       <li>
-    //         <p>{recipes.name}</p>
-    //         <p>{recipes.ingredients}</p>
-    //         <p>{recipes.notes}</p>
-    //       </li>;
-    //     });
-        
-    // }
-    
+
+    handleAddRecipe() {
+
+    }
+
     render() {
         return (
             <div>
                 <ul>
-                    {this.recipesList}
+                    {
+                        this.state.recipes.map((recipe) => (
+                        <li key={this.state.recipes.indexOf(recipe)}>
+                            {recipe.name} 
+                            <br/> 
+                            <ul>
+                                {
+                                    recipe.ingredients.map((ingredient) => (
+                                        <li key={recipe.ingredients.indexOf(ingredient)}> 
+                                            {
+                                                ingredient + " "
+                                            } 
+                                        </li>
+                                    ))
+                                }
+                            </ul>
+                        </li>))
+                    }
                 </ul>
+                
+                <button onClick={alert()}></button>
             </div>
         )
   }
