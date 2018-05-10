@@ -4,7 +4,9 @@ import Recipes from '../Recipes/Recipes';
 
 export default class RecipeBox extends Component {
   render() {
-    return <Recipes></Recipes>
+    return <section>
+        <Recipes />
+      </section>;
   }
 };
 
