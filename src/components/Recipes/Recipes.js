@@ -6,10 +6,10 @@ export default class Recipes extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            recipes: [], 
+            // recipes: [], 
             modalToggle: false,
             recipeName: "",
-            recipeIngredient: [],
+            // recipeIngredient: [],
             recipeNotes: "" 
         };
 
@@ -24,68 +24,79 @@ export default class Recipes extends Component {
             return prevState.recipes = [
                 {
                     name: "Peanut Butter and Jelly Sandwich",
-                    ingredients: ["Peanut Butter", "Jelly", "Bread Loaf"],
+                    // ingredients: ["Peanut Butter", "Jelly", "Bread Loaf"],
                     notes: "Get two slices of bread toasted and slab some pb & j."
                 },
                 {
                     name: "Tuna Sandwich",
-                    ingredients: ["Tuna", "Mayo", "Bread Loaf"],
+                    // ingredients: ["Tuna", "Mayo", "Bread Loaf"],
                     notes: "tuna tonight"
                 },
                 {
                     name: "Rice and Beans",
-                    ingredients: ["Rice", "Jelly", "Bread Loaf"],
+                    // ingredients: ["Rice", "Jelly", "Bread Loaf"],
                     notes: "Get two slices of bread toasted and slab some pb & j."
                 }
             ]
         })
     }
 
+    // makes recipe name and recipe notes inputs use react state instead of its default internal state
     handleInputChange(event) {
         let name = event.target.name;
-        
-        if(name === "recipeIngredient"){
-            this.setState({
-                [name]: prevState.recipeIngredient.push(event.target.value)
-            }); 
-        }
-        else {
-            this.setState({
-                [name]: event.target.value
-            }); 
-        }
+        let value = event.target.value;
+        console.log(name + " " + value);
+
+        this.setState({
+            [name]: value
+        }); 
     }
 
+    // might make into a component
+    handleInputIngredients(){
+        let name = event.target.name;
+        let value = event.target.value;
+        console.log(name + " " + value);
+        this.setState((prevState) => { 
+            return {[name]: prevState.recipeIngredient.push(value)};
+        });
+    }
+
+    // adds recipe to recipe list
     handleAddRecipe(event) {
         event.preventDefault();
 
         this.setState((prevState) => {
             prevState.recipes.push({
-                recipeName: prevState.recipeName,
-                recipeIngredient: prevState.recipeIngredient.push(this.state.recipeIngredient[0]),
-                recipeNotes: prevState.recipeNotes
+                name: prevState.recipeName,
+                // ingredients: prevState.recipeIngredient,
+                notes: prevState.recipeNotes
             });
         });    
+
+        this.handleToggleModal();
     }
 
+    // opens/closes modal
     handleToggleModal(){
         this.setState(prevState => ({modalToggle: !prevState.modalToggle}));
     }
 
     render() {
         return <div>
-            <ul className="recipeList">
+            <ul>
               {this.state.recipes.map(recipe => (
                 <li key={this.state.recipes.indexOf(recipe)}>
-                  {recipe.name}
-                  <br />
-                  <ul>
-                    {recipe.ingredients.map(ingredient => (
-                      <li key={recipe.ingredients.indexOf(ingredient)}>
-                        {ingredient + " "}
-                      </li>
-                    ))}
-                  </ul>
+                    {recipe.name}
+                    <br />
+                    {/*<ul>
+                        {recipe.ingredients.map(ingredient => (
+                            <li key={recipe.ingredients.indexOf(ingredient)}>
+                            {ingredient + " "}
+                            </li>
+                        ))}
+                    </ul>*/}
+                    {recipe.notes}
                 </li>
               ))}
             </ul>
@@ -93,7 +104,7 @@ export default class Recipes extends Component {
             <ReactModal isOpen={this.state.modalToggle} ariaHideApp={false}>
               <form onSubmit={this.handleAddRecipe}>
                 <input type="text" onChange={this.handleInputChange} value={this.state.recipeName} name="recipeName" placeholder="Recipe Name.." />
-                <input type="text" onChange={this.handleInputChange} value={this.state.recipeIngredient} name="recipeIngredient" placeholder="Ingredient.." />
+                {/*<input type="text" onChange={this.handleInputChange} value={this.state.recipeIngredient} name="recipeIngredient" placeholder="Ingredient Name.." />*/}
                 <input type="text" onChange={this.handleInputChange} value={this.state.recipeNotes} name="recipeNotes" placeholder="Notes.." />
                 <button type="submit">Add recipe</button>
               </form>
@@ -102,5 +113,5 @@ export default class Recipes extends Component {
 
             <button onClick={this.handleToggleModal}>Add</button>
           </div>;
-  }
+    }
 };
