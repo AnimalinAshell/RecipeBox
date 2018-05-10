@@ -60,6 +60,9 @@ export default class Recipes extends Component {
         this.setState(prevState => {
           prevState.recipeIngredient.push(prevState.holdIngredient);
         }); 
+
+        this.handleToggleModal();
+        this.handleToggleModal();   
     }
 
     // adds recipe to recipe list
@@ -110,7 +113,7 @@ export default class Recipes extends Component {
                 </button>
                 {this.state.recipeIngredient.map(ingredient => (
                   <li key={this.state.recipeIngredient.indexOf(ingredient)}>
-                    {console.log(ingredient)}
+                    {ingredient}
                   </li>
                 ))}
                 <input type="text" onChange={this.handleInputChange} value={this.state.recipeNotes} name="recipeNotes" placeholder="Notes.." />
