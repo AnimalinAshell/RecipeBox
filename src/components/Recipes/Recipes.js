@@ -85,21 +85,29 @@ export default class Recipes extends Component {
         this.setState(prevState => ({modalToggle: !prevState.modalToggle}));
     }
 
+    handleDeleteRecipe(){
+
+    }
+
     render() {
         return <div>
+            <button onClick={this.handleToggleModal}>Add</button>
+
             <ul>
-              {this.state.recipes.map(recipe => (
+              {this.state.recipes.map(recipe => (                
                 <li key={this.state.recipes.indexOf(recipe)}>
-                  {recipe.name}
-                  <br />
-                  <ul>
-                    {recipe.ingredients.map(ingredient => (
-                      <li key={recipe.ingredients.indexOf(ingredient)}>
+                    <button onClick={this.handleDeleteRecipe}>Delete Recipe</button>
+                    {recipe.name}
+                    <br />
+                    <ul>
+                    {recipe.ingredients.map((ingredient, index) => (
+                        <li key={index}>
                         {ingredient + " "}
-                      </li>
+                        </li>
                     ))}
-                  </ul>
-                  {recipe.notes}
+                    </ul>
+                    {recipe.notes}
+                    <hr/>
                 </li>
               ))}
             </ul>
@@ -111,8 +119,8 @@ export default class Recipes extends Component {
                 <button onClick={this.handleAddIngredient}>
                   Add ingredient
                 </button>
-                {this.state.recipeIngredient.map(ingredient => (
-                  <li key={this.state.recipeIngredient.indexOf(ingredient)}>
+                {this.state.recipeIngredient.map(((ingredient, index) => 
+                  <li key={index}>
                     {ingredient}
                   </li>
                 ))}
@@ -122,7 +130,6 @@ export default class Recipes extends Component {
               <button onClick={this.handleToggleModal}>X</button>
             </ReactModal>
 
-            <button onClick={this.handleToggleModal}>Add</button>
-          </div>;
+          </div>
     }
 };
